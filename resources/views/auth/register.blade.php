@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header bg-primary text-light">{{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nama') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="off" autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="off">
@@ -44,7 +44,7 @@
 
                             <div class="col-md-6">
                                 <select id="membership_type" class="form-control @error('membership_type') is-invalid @enderror" name="membership_type" required>
-                                    <option value="">-- Select Membership --</option>
+                                    <option value="">-- Tipe Membership --</option>
                                     <option value="A" {{ old('membership_type') == 'A' ? 'selected' : '' }}>A (3 Artikel & 3 Video)</option>
                                     <option value="B" {{ old('membership_type') == 'B' ? 'selected' : '' }}>B (10 Artikel & 10 Video)</option>
                                     <option value="C" {{ old('membership_type') == 'C' ? 'selected' : '' }}>C (Unlimited Access)</option>
@@ -90,12 +90,12 @@
                     </form>
                     <div class="card-body">
                         <div class="social-login text-center mt-4">
-                            <p class="mb-3">Atau daftar dengan:</p>
+                            <p class="mb-3"><b>Atau daftar dengan:<b></p>
                             
                             <form id="social-register-form" method="GET">
                                 <div class="form-group mb-3">
                                     <select id="social-membership-type" name="membership_type" class="form-control" required>
-                                        <option value="">-- Pilih Membership --</option>
+                                        <option value="">-- Tipe Membership --</option>
                                         <option value="A">A (3 Artikel & 3 Video)</option>
                                         <option value="B">B (10 Artikel & 10 Video)</option>
                                         <option value="C">C (Unlimited Access)</option>

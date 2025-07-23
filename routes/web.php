@@ -15,11 +15,6 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-
 Route::get('/articles', [App\Http\Controllers\ContentController::class, 'articles'])->name('articles')->middleware('auth');
 Route::get('/videos', [App\Http\Controllers\ContentController::class, 'videos'])->name('videos')->middleware('auth');
 
-Route::middleware(['auth', 'membership:C'])->group(function () {
-    Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'users'])->name('admin.users');
-    Route::post('/admin/users/{user}/upgrade', [App\Http\Controllers\AdminController::class, 'upgrade'])->name('admin.upgrade');
-});
-
 Route::get('/auth/google', [App\Http\Controllers\Auth\SocialAuthController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/auth/google/callback', [App\Http\Controllers\Auth\SocialAuthController::class, 'handleGoogleCallback']);
 

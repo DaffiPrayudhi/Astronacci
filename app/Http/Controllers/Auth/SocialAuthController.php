@@ -41,8 +41,6 @@ class SocialAuthController extends Controller
             $existingUser = User::where('email', $googleUser->getEmail())->first();
             
             if ($existingUser) {
-                $membershipType = $existingUser->membership_type;
-                
                 $existingUser->update([
                     'name' => $googleUser->getName(),
                     'provider' => 'google',
@@ -50,7 +48,8 @@ class SocialAuthController extends Controller
                     'avatar' => $googleUser->getAvatar()
                 ]);
                 
-                $user = $existingUser;
+                Auth::login($existingUser, true);
+                return redirect()->intended('/dashboard');
             } else {
                 $membershipType = session('socialite.membership_type', 'A');
                 
@@ -63,18 +62,10 @@ class SocialAuthController extends Controller
                     'membership_type' => $membershipType,
                     'password' => bcrypt(Str::random(16))
                 ]);
+
+                $request->session()->forget('socialite.membership_type');
+                return redirect('/login')->with('success', 'Registrasi dengan Google berhasil! Silakan login.');
             }
-
-            Auth::login($user, true);
-
-            $request->session()->forget([
-                'socialite.provider',
-                'socialite.state',
-                'socialite.oauth_token',
-                'socialite.membership_type'
-            ]);
-
-            return redirect()->intended('/dashboard');
 
         } catch (\Exception $e) {
             \Log::error('Google OAuth Error: ' . $e->getMessage());
@@ -111,8 +102,6 @@ class SocialAuthController extends Controller
             $existingUser = User::where('email', $facebookUser->getEmail())->first();
             
             if ($existingUser) {
-                $membershipType = $existingUser->membership_type;
-                
                 $existingUser->update([
                     'name' => $facebookUser->getName(),
                     'provider' => 'facebook',
@@ -120,7 +109,8 @@ class SocialAuthController extends Controller
                     'avatar' => $facebookUser->getAvatar()
                 ]);
                 
-                $user = $existingUser;
+                Auth::login($existingUser, true);
+                return redirect()->intended('/dashboard');
             } else {
                 $membershipType = session('socialite.membership_type', 'A');
                 
@@ -133,18 +123,10 @@ class SocialAuthController extends Controller
                     'membership_type' => $membershipType,
                     'password' => bcrypt(Str::random(16))
                 ]);
+
+                $request->session()->forget('socialite.membership_type');
+                return redirect('/login')->with('success', 'Registrasi dengan Facebook berhasil! Silakan login.');
             }
-
-            Auth::login($user, true);
-
-            $request->session()->forget([
-                'socialite.provider',
-                'socialite.state',
-                'socialite.oauth_token',
-                'socialite.membership_type'
-            ]);
-
-            return redirect()->intended('/dashboard');
 
         } catch (\Exception $e) {
             \Log::error('Facebook OAuth Error: ' . $e->getMessage());
