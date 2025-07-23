@@ -1,0 +1,13 @@
+Tipe A
+email : membera@gmail.com
+pw : membera12345
+
+Tipe B
+email : memberb@gmail.com
+pw : memberb123
+
+Tipe C
+email : memberc@gmail.com
+pw : memberc123
+
+
